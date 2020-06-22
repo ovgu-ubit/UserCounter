@@ -1,0 +1,19 @@
+UserCounter uses third-party libraries which may be distributed under different 
+licenses. We have listed all of these third party libraries and their licenses
+below.
+
+You must agree to the terms of these licenses, in addition to the UserCounter 
+source code license, in order to use this software.
+
+---------------------------------------------------
+Third party Java libraries listed by License type.
+
+PLEASE NOTE: Some dependencies may be listed under multiple licenses if they
+are dual-licensed. This is especially true of anything listed as 
+"GNU General Public Library" below, as UserCounter actually does NOT allow for any 
+dependencies that are solely released under GPL terms.
+---------------------------------------------------
+
+    Apache Software License, Version 2.0:
+
+        * ini4j - http://ini4j.sourceforge.net/license.html)
