@@ -1,5 +1,5 @@
-# Besucherzähler ***CovID** (**C**ount **o**f **v**alid **ID**s)*
-## Universtitätsbibliothek Magdeburg
+# Besucherzähler Universtitätsbibliothek Magdeburg
+# ***CovID** (**C**ount **o**f **v**alid **ID**s)*
 Stand: 20.11.2020\
 Bearbeiter: Christian Schulz\
 Beschreibung und Datenschutz
@@ -24,30 +24,31 @@ Prozess:
 
 ## Installation
 Anleitung zum Kompilieren der Java-Anwendung (unter Windows):
- - Öffnen Sie die Kommandozeile und wechsel Sie in ein Arbeitsverzeichnis, in welchem die ausführbare JAR-Datei generiert werden soll (Projekt-Pfad).
+ - Öffnen Sie die Kommandozeile und wechsel Sie in ein Arbeitsverzeichnis, in welchem die ausführbare JAR-Datei generiert werden soll.
+ - Kopieren Sie den Inhalt dieses Git-Projekts in dieses Verzeichnis.
  - Im aktuellen Pfad die verwendeten Bibliotheken hinzufügen:\
-    $ "<JDK-Pfad>\bin\jar.exe" -xf lib\ini4j-0.5.4.jar org
+    `$ "<JDK-Pfad>\bin\jar.exe" -xf lib\ini4j-0.5.4.jar org`
  - Im aktuellen Pfad die notwendigen CLASS-Dateien erzeugen:\
-    $ "<JDK-Pfad>\bin\javac.exe" -sourcepath src -d . src\Main.java
+    `$ "<JDK-Pfad>\bin\javac.exe" -sourcepath src -d . src\Main.java`
  - Im aktuellen Pfad die ausführbare UserCounter.jar erzeugen (CLASSPATH- und MAIN-CLASS-Parameter werden in der Datei MANIFEST.MF definiert):\
-    $ "<JDK-Pfad>\bin\jar.exe" -cmf META-INF\MANIFEST.MF UserCounter.jar Main.class controller model view org
+    `$ "<JDK-Pfad>\bin\jar.exe" -cmf META-INF\MANIFEST.MF UserCounter.jar Main.class controller model view org`
  - Die kompilierten Dateien aufräumen:\
-    $ DEL /F/Q/S Main.class > NUL
-    $ RMDIR /Q/S controller model view org > NUL
+    `$ DEL /F/Q/S Main.class > NUL`
+    `$ RMDIR /Q/S controller model view org > NUL`
  - Die JAR-Datei ausführen:\
-    $ "<JDK-Pfad>\bin\java.exe" -jar UserCounter.jar
+    `$ "<JDK-Pfad>\bin\java.exe" -jar UserCounter.jar`
 
 Alternativ kann das Projekt auch in Eclipse importiert und dort als JAR-Datei exportiert werden.
 
 ## Konfigurationsparameter
-Für die initiale Konfiguration wird die Datei **config.ini** im Ausführungsverzeichnis des Programms genutzt. Zur Konfiguration existieren die folgenden Parameter:
- -	**max_user**: Ganzzahlwert für den Grenzwert maximal gleichzeitig anwesender Besucher
- -	**threshold_yellow**: Gleitkommawert für den prozentualen Schwellwert der gelben Ampel
- -	**barcode_regex**: Zeichenkette für den regulären Ausdruck des Barcode-Formats (keinen 	Wert setzen lässt alle Barcodes zu)
- -	**fade_timeout**: Ganzzahlwert für die Anzahl der Millisekunden bis zum Ausblenden von 	Informationen (standardmäßig bei 10000 für 10 Sekunden)
- -	**path**: Zeichenkette für den Pfad der Ausgabedatei relativ zum Ausführungsverzeichnis des Programms
- -	**header**: Zeichenkette für die Kopfspalte der Ausgabedatei
- -	**sep**: Zeichen für das Spalten-Trennzeichen der Ausgabedatei
+Für die initiale Konfiguration wird die Datei `config.ini` im Ausführungsverzeichnis des Programms genutzt. Zur Konfiguration existieren die folgenden Parameter:
+ -	`max_user`: Ganzzahlwert für den Grenzwert maximal gleichzeitig anwesender Besucher
+ -	`threshold_yellow`: Gleitkommawert für den prozentualen Schwellwert der gelben Ampel
+ -	`barcode_regex`: Zeichenkette für den regulären Ausdruck des Barcode-Formats (keinen 	Wert setzen lässt alle Barcodes zu)
+ -	`fade_timeout`: Ganzzahlwert für die Anzahl der Millisekunden bis zum Ausblenden von 	Informationen (standardmäßig bei 10000 für 10 Sekunden)
+ -	`path`: Zeichenkette für den Pfad der Ausgabedatei relativ zum Ausführungsverzeichnis des Programms
+ -	`header`: Zeichenkette für die Kopfspalte der Ausgabedatei
+ -	`sep`: Zeichen für das Spalten-Trennzeichen der Ausgabedatei
 	
 Befindet sich eine Datei ous100_barcodes.csv im Ausführungsverzeichnis des Programms, so werden darin enthaltene Barcodes, dem definierten regulären Ausdruck entsprechend, in den Cache des Programms geladen und mit eingescannten Barcodes vergleichen und geprüft, ob diese bereits (an-)gemeldet sind (in der Liste enthalten) oder nicht. Sind neue Barcodes nicht in der Liste enthalten, erscheint eine Information: "Achtung: Nutzer muss sich an der Ausleihtheke melden." Fehlt diese Datei, wird keine entsprechende Prüfung vorgenommen und daher auch keine Warnung über nicht angemeldete Nutzer ausgegeben.
 
