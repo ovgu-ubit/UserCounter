@@ -1,6 +1,7 @@
-# Besucherzähler Universtitätsbibliothek Magdeburg
-Stand: 18.05.2020<br />
-Bearbeiter: Veit Köppen<br />
+# Besucherzähler ***CovID** (**C**ount **o**f **v**alid **ID**s)*
+## Universtitätsbibliothek Magdeburg
+Stand: 20.11.2020\
+Bearbeiter: Christian Schulz\
 Beschreibung und Datenschutz
 
 ## Executive Summary
@@ -9,6 +10,7 @@ Aus diesen Anforderungen wurde ein Stand-Alone-Tool entwickelt, dass sowohl die 
 
 ## Aufbau Programm
 Anforderungen: Rechner inkl. Barcodescanner zur kontaktlosen Bibliotheksnutzernummer-Erfassung.
+Funktionsweise: Der Scanner sendet eine Zeichenkette direkt als Keyboard-Eingabe an das Betriebssystem, sodass diese vom Programm, das auf Eingaben lauscht, erfasst und verarbeitet wird. Die entstehenden Protokoll-Dateien (Logs) werden tagesweise (mit entsprechendem Datums-Stempel) gespeichert und können dann, entsprechend der derzeit gültigen gesetzlichen Regelungen, archiviert werden.
 
 Prozess:
  1.	Nutzer tritt ein, scannt selbstständig seinen Nutzerausweis ein
@@ -20,13 +22,30 @@ Prozess:
  7.	Anwender klickt auf "Raus"
  8.	Zeitstempel und Barcode werden in einer CSV-Datei gespeichert (Ausgangsvermerk)
 
+## Installation
+Anleitung zum Kompilieren der Java-Anwendung (unter Windows):
+ - Öffnen Sie die Kommandozeile und wechsel Sie in ein Arbeitsverzeichnis, in welchem die ausführbare JAR-Datei generiert werden soll (Projekt-Pfad).
+ - Im aktuellen Pfad die verwendeten Bibliotheken hinzufügen:\
+    $ "<JDK-Pfad>\bin\jar.exe" -xf lib\ini4j-0.5.4.jar org
+ - Im aktuellen Pfad die notwendigen CLASS-Dateien erzeugen:\
+    $ "<JDK-Pfad>\bin\javac.exe" -sourcepath src -d . src\Main.java
+ - Im aktuellen Pfad die ausführbare UserCounter.jar erzeugen (CLASSPATH- und MAIN-CLASS-Parameter werden in der Datei MANIFEST.MF definiert):\
+    $ "<JDK-Pfad>\bin\jar.exe" -cmf META-INF\MANIFEST.MF UserCounter.jar Main.class controller model view org
+ - Die kompilierten Dateien aufräumen:\
+    $ DEL /F/Q/S Main.class > NUL
+    $ RMDIR /Q/S controller model view org > NUL
+ - Die JAR-Datei ausführen:\
+    $ "<JDK-Pfad>\bin\java.exe" -jar UserCounter.jar
+
+Alternativ kann das Projekt auch in Eclipse importiert und dort als JAR-Datei exportiert werden.
+
 ## Konfigurationsparameter
 Für die initiale Konfiguration wird die Datei **config.ini** im Ausführungsverzeichnis des Programms genutzt. Zur Konfiguration existieren die folgenden Parameter:
  -	**max_user**: Ganzzahlwert für den Grenzwert maximal gleichzeitig anwesender Besucher
  -	**threshold_yellow**: Gleitkommawert für den prozentualen Schwellwert der gelben Ampel
  -	**barcode_regex**: Zeichenkette für den regulären Ausdruck des Barcode-Formats (keinen 	Wert setzen lässt alle Barcodes zu)
  -	**fade_timeout**: Ganzzahlwert für die Anzahl der Millisekunden bis zum Ausblenden von 	Informationen (standardmäßig bei 10000 für 10 Sekunden)
- -	**path**: Zeichenkette für den Pfad der Ausgabedatei relativ zum Ausführungsverzeichnis des 	Programms
+ -	**path**: Zeichenkette für den Pfad der Ausgabedatei relativ zum Ausführungsverzeichnis des Programms
  -	**header**: Zeichenkette für die Kopfspalte der Ausgabedatei
  -	**sep**: Zeichen für das Spalten-Trennzeichen der Ausgabedatei
 	
@@ -43,22 +62,12 @@ Die Mitteilung über die betroffene Person zur Identifikation der Bibliotheksmit
  4.	Im LBS4-System werden anhand der Nutzernummern, die Personen und ihre Kontaktdaten ermittelt und an die anfordernde Stelle in Form einer Excelliste (ggfs. verschlüsselt oder per Datenträger) weitergeleitet.
 
 ## Ansprechpartner
-**Eckhard Blume**<br />
-Leitender Bibliotheksdirektor UB Magdeburg<br />
-E-Mail: eckhard.blume@ovgu.de<br />
-Telefon: +49-391-67-58566
-
-**Dr. Veit Köppen**<br />
-Abteilungsleiter IT-Anwendungen & Datenschutzkoordinator UB Magdeburg<br />
-E-Mail: veit.koeppen@ovgu.de<br />
-Telefon: +49-391-67-58840
-
-**Dr. Sascha Bosse**<br />
-Bibliothekssystemverwalter<br />
-E-Mail: sascha.bosse@ovgu.de<br />
+**Dr. Sascha Bosse**\
+Bibliothekssystemverwalter\
+E-Mail: sascha.bosse@ovgu.de\
 Telefon: +49-391-67-52555
 
-**Christian Schulz**<br />
-IT-Anwendungsbetreuer<br />
-E-Mail: christian.schulz@ovgu.de<br />
+**Christian Schulz**\
+IT-Anwendungsbetreuer\
+E-Mail: christian.schulz@ovgu.de\
 Telefon: +49-391-67-57414
